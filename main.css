@@ -1,0 +1,160 @@
+* {
+    box-sizing: content-box;
+}
+
+/* Miscellaneous Classes*/
+
+.unselectable {
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-user-drag: none;
+    user-drag: none;
+}
+
+/* Structure Styling */
+
+.sectionLeft {
+    float: left;
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.sectionRight {
+    float: right;
+    width: 20%;
+}
+
+.scoreContainer {
+    background-color: hsla(130, 15%, 45%, 0.5);
+    border-radius: 10px;
+    width: 50%;
+    padding: 15px;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.sectionFooter {
+    margin-top: 20%;
+    align-self: flex-start;
+}
+
+/* .clickerContainer img {
+    position: relative;
+
+}
+
+.clickerContainer img:hover {
+    transform: scale(1.1);
+}
+
+.clickerContainer img:active {
+    transform: scale(0.99);
+} */
+
+#clicker {
+    background-image: url("./img/popcorn.svg");
+    background-size: contain;
+    position: relative;
+    width: 200px;
+    height: 200px;
+    transition: transform 0.2s ease;
+    cursor: pointer;
+}
+
+#clicker:hover {
+    transform: scale(1.1);
+}
+
+#clicker:active {
+    transform: scale(0.9);
+}
+
+#clicker > .number {
+    z-index: 99;
+    font-size: 36px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: black;
+    position: absolute;
+}
+
+#info {
+    font-size: 0.83em;
+    font-weight: bold;
+}
+
+.shopButton {
+    background-color: hsl(0, 0%, 75%);
+    border-radius: 10px;
+    transition: all 0.2s ease-in-out;
+    width: 100%;
+    margin: 10px 0px 10px 0px;
+    cursor: pointer;
+}
+
+.shopButton:hover {
+    background-color: hsl(0, 0%, 80%);
+    transition: all 0.2s ease-in-out;
+}
+
+.shopButton #image {
+    width: 25%;
+}
+
+.shopButton img {
+    width: 64px;
+    height: auto;
+}
+
+.shopButton #nameAndCost p {
+    margin: 0px;
+    width: 60%;
+}
+
+.shopButton #nameAndCost p:first-of-type {
+    font-size: 24px;
+}
+
+.shopButton #amount {
+    font-size: 48px;
+    color: hsl(0, 0%, 35%);
+    font-family: roboto;
+    width: 15%;
+}
+
+#contextMenu {
+    position: fixed;
+    z-index: 1;
+    width: 150px;
+    background-color: hsla(0, 0%, 80%, 0.8);
+    border-radius: 4.5px;
+    display: none;
+}
+
+#contextMenu > .contextMenuItem {
+    padding: 8px 10px;
+    font-size: 16px;
+    color: hsl(0, 0%, 20%);
+    cursor: pointer;
+    border-radius: inherit;
+    transition: background-color 0.2s ease;
+}
+
+#contextMenu > .contextMenuItem:hover {
+    background-color: hsl(0, 0%, 70%, 0.8);
+}
+
+#contextMenu.visible {
+    display: block;
+}
+
+#upgradeContainer img,
+#achievementContainer img {
+    width: 64px;
+    height: 64px;
+}

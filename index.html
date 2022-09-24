@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Popcorn Clicker</title>
+    <link rel="stylesheet" href="main.css" type="text/css">
+    <link rel="icon" type="image/x-icon" href="img/popcorn.ico">
+</head>
+
+<body>
+    <div id="contextMenu">
+        <div class="contextMenuItem" onclick="saveGame();">Save Game</div>
+        <div class="contextMenuItem" onclick="resetGame();">Reset Game</div>
+        <div class="contextMenuItem" onclick="background();">Background Music</div>
+    </div>
+    <script src="contextMenu.js"></script>
+    <div class="sectionLeft">
+        <div class="scoreContainer unselectable">
+            <span data-bs-toggle="tooltip" data-bs-placement="bottom" title="Popcorn Amount"><span id="score">0</span>
+                Pop&shy;corn Pieces</span>
+            <div class="horizontalRule"></div>
+            <span id="autoClickPerSecond">0</span> Pop&shy;corn Pieces Per Sec&shy;ond
+        </div>
+        <br>
+        <div class="clickerContainer unselectable" id="clicker"></div>
+        <div class="sectionFooter">
+            <p id="info"></p>
+        </div>
+    </div>
+
+    <div class="sectionRight">
+        <div id="upgradeContainer"></div>
+        <div id="shopContainer"></div>
+        <div id="achievementContainer"></div>
+    </div>
+    <script src="main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</body>
+
+</html>
