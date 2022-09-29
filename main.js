@@ -14,9 +14,17 @@ let game = {
     getScorePerSecond: function () {
         let scorePerSecond = 0;
         for (let i = 0; i < building.name.length; i++) {
-            scorePerSecond = scorePerSecond + building.income[i] * building.count[i];
+            scorePerSecond += building.income[i] * building.count[i];
         }
         return scorePerSecond;
+    },
+
+    getWage: () => {
+        let wage = 0;
+        for (let i = 0; i < building.name.length; i++) {
+            wage += building.wage[i] * building.count[i];
+        }
+        return wage;
     }
 }
 
@@ -31,6 +39,7 @@ let building = {
         "popcorn_farm.svg",
         "popcorn_employees.svg"
     ],
+    wage: [0, 1, 10],
     count: [0, 0, 0],
     income: [1, 10, 100],
     cost: [30, 1000, 100000],
@@ -149,6 +158,9 @@ let display = {
         document.getElementById("score").innerHTML = game.score;
         document.getElementById("autoClickPerSecond").innerHTML = game.getScorePerSecond();
         document.title = "Popcorn Clicker - " + game.score + " Popcorn Pieces";
+    },
+    updateWage: () => {
+        document.getElementById("wage").innerHTML = game.getWage()
     },
     updateShop: () => {
         document.getElementById("shopContainer").innerHTML = "";
@@ -353,9 +365,14 @@ setInterval(function () {
 
 setInterval(function () {
     display.updateScore();
+    display.updateWage();
     display.updateUpgrades();
     display.updateVersion();
 }, 0) // 10 seconds
+
+setInterval(function () {
+    game.score -= game.getWage();
+}, 5000)
 
 setInterval(function () {
     saveGame();
