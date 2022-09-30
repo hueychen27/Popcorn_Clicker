@@ -385,19 +385,33 @@ document.addEventListener("keydown", function (e) {
     }
 }, false)
 
+function multiplyByInfinity() {
+    Swal.fire({
+        title: 'Set Score to Infinity?',
+        text: 'Are you sure you want to set score to infinity?',
+        icon: 'warning',
+        confirmButtonText: 'Yes',
+        showDenyButton: true
+    }).then((result) => {
+        if (result.isConfirmed) {
+            Swal.fire({
+                title: 'You Sure?!',
+                text: 'Are you sure you really want to do that?',
+                icon: 'warning',
+                confirmButtonText: 'Yes',
+                showDenyButton: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    game.addToScore(Infinity);
+                }
+            })
+        }
+    })
+}
+
 document.addEventListener("keydown", function (e) {
     if (e.ctrlKey && e.key === '.') {
         e.preventDefault();
-        Swal.fire({
-            title: 'Multiply Popcorn Pieces by 1000?',
-            text: 'Are you sure you want to multiply popcorn pieces by 1000?',
-            icon: 'warning',
-            confirmButtonText: 'Yes',
-            showDenyButton: true
-        }).then((result) => {
-            if (result.isConfirmed) {
-                game.addToScore(game.score * 1000);
-            }
-        })
+        document.getElementById("cheatContainer").classList.toggle("show");
     }
 }, false)

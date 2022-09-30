@@ -158,3 +158,44 @@
     width: 64px;
     height: 64px;
 }
+
+/* Cheat Container Styling */
+
+#cheatContainer {
+    position: fixed;
+    display: none;
+    z-index: 2;
+    bottom: 0px;
+    left: 0;
+    width: 100%;
+    padding: 10px 20px;
+    margin: 0;
+    border-top: 1px solid black;
+    background-color: hsl(0, 0%, 50%, 0.8);
+}
+
+#cheatContainer.show {
+    display: block;
+}
+
+#cheatContainer > .button {
+    display: inline-block;
+    border: 1px solid black;
+    background-color: hsl(0, 0%, 82%, 0.8);
+    border-radius: 10px;
+    transition: all 0.1s ease-in;
+    padding: 10px;
+}
+
+#cheatContainer > .button:hover {
+    background-color: hsl(0, 0%, 90%, 0.8);
+}
+
+#cheatContainer > .button:active {
+    background-color: hsl(0, 0%, 60%, 0.8);
+    transform: scale(1.1);
+}
+
+#cheatContainer__header {
+    text-align: center;
+}

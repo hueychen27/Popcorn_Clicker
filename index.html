@@ -38,6 +38,21 @@
         <div id="shopContainer"></div>
         <div id="achievementContainer"></div>
     </div>
+    <div id="cheatContainer">
+        <h1 id="cheatContainer__header">Cheats</h1>
+        <div class="button unselectable" role="button" onclick="Swal.fire({
+            title: 'Multiply Popcorn Pieces by 1000?',
+            text: 'Are you sure you want to multiply popcorn pieces by 1000?',
+            icon: 'warning',
+            confirmButtonText: 'Yes',
+            showDenyButton: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                game.addToScore(game.score * 1000);
+            }
+        })">Multiply Score by 1000</div>
+        <div class="button unselectable" role="button" onclick="multiplyByInfinity()">Set Score to Infinity</div>
+    </div>
     <script src="main.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
