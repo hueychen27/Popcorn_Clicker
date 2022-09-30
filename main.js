@@ -386,7 +386,7 @@ document.addEventListener("keydown", function (e) {
 }, false)
 
 document.addEventListener("keydown", function (e) {
-    if (e.ctrlKey && e.key === '*') {
+    if (e.ctrlKey && e.key === '.') {
         e.preventDefault();
         Swal.fire({
             title: 'Increase Popcorn Pieces by 1000?',
