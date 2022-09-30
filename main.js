@@ -384,3 +384,20 @@ document.addEventListener("keydown", function (e) {
         saveGame();
     }
 }, false)
+
+document.addEventListener("keydown", function (e) {
+    if (e.ctrlKey && e.key === '*') {
+        e.preventDefault();
+        Swal.fire({
+            title: 'Increase Popcorn Pieces by 1000?',
+            text: 'Are you sure you want to increase popcorn pieces by 1000?',
+            icon: 'warning',
+            confirmButtonText: 'Yes',
+            showDenyButton: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                game.addToScore(game.score * 1000);
+            }
+        })
+    }
+})
