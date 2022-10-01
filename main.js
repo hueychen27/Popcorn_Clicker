@@ -39,7 +39,7 @@ let building = {
         "batch_of_popcorn.svg",
         "popcorn_farm.svg",
         "popcorn_employees.svg",
-        "popcorn_factory.svg"
+        "popcorn_factories.svg"
     ],
     wage: [0, 1, 10, 1000],
     count: [0, 0, 0, 0],
