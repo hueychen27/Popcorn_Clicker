@@ -173,7 +173,7 @@ let display = {
     updateShop: () => {
         document.getElementById("shopContainer").innerHTML = "";
         for (let i = 0; i < building.name.length; i++) {
-            document.getElementById("shopContainer").innerHTML += '<table class="shopButton unselectable" onclick="building.purchase(' + i + ');" title="Wage: ' + building.wage[i] + ' &#10; Increases popcorn per second by: ' + building.income[i] + ' &#10; Cost Multiplier: ' + building.costMultiplier[i] + '"><tr><td id="image"><img src="img/' + building.image[i] + '" draggable="false"></td><td id="nameAndCost"><p>' + building.name[i] + '</p><p><span>' + building.cost[i] + '</span> Pop&shy;corn Pieces</p></td><td id="amount"><span>' + building.count[i] + '</span></td></tr></table>';
+            document.getElementById("shopContainer").innerHTML += '<table class="shopButton unselectable" onclick="building.purchase(' + i + ');" title="Wage: ' + building.wage[i] + ' &#10; Increases popcorn per second by: ' + building.income[i] + ' &#10; Cost Multiplier: ' + building.costMultiplier[i] + '" role="button"><tr><td id="image"><img src="img/' + building.image[i] + '" draggable="false"></td><td id="nameAndCost"><p>' + building.name[i] + '</p><p><span>' + building.cost[i] + '</span> Pop&shy;corn Pieces</p></td><td id="amount"><span>' + building.count[i] + '</span></td></tr></table>';
         }
     },
     updateUpgrades: () => {
@@ -356,6 +356,7 @@ window.onload = function () {
     display.updateUpgrades();
     display.updateAchievements();
     display.updateShop();
+    display.updateVersion();
 }
 
 setInterval(function () {
@@ -375,7 +376,6 @@ setInterval(function () {
     display.updateScore();
     display.updateWage();
     display.updateUpgrades();
-    display.updateVersion();
 }, 0) // 10 seconds
 
 setInterval(function () {
@@ -392,6 +392,13 @@ document.addEventListener("keydown", function (e) {
         saveGame();
     }
 }, false)
+
+document.addEventListener("keydown", function (e) {
+    if (e.ctrlKey && e.key === 'r') {
+        e.preventDefault();
+        resetGame();
+    }
+})
 
 function multiplyByInfinity() {
     Swal.fire({
