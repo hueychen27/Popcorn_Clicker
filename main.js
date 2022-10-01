@@ -32,19 +32,21 @@ let building = {
     name: [
         "Batch of Popcorn",
         "Popcorn Farm",
-        "Popcorn Employees"
+        "Popcorn Employees",
+        "Popcorn Factories"
     ],
     image: [
         "batch_of_popcorn.svg",
         "popcorn_farm.svg",
-        "popcorn_employees.svg"
+        "popcorn_employees.svg",
+        "popcorn_factory.svg"
     ],
-    wage: [0, 1, 10],
-    count: [0, 0, 0],
-    income: [1, 10, 100],
-    cost: [30, 1000, 100000],
+    wage: [0, 1, 10, 1000],
+    count: [0, 0, 0, 0],
+    income: [1, 10, 100, 1111],
+    cost: [30, 1000, 100000, 400000],
 
-    costMultiplier: [1.2, 1.6, 1.4],
+    costMultiplier: [1.2, 1.6, 1.4, 1.5],
 
     purchase: function (index) {
         if (game.score >= this.cost[index]) {
@@ -67,7 +69,7 @@ let upgrade = {
     ],
     description: [
         "Popcorn batches are twice as efficient.",
-        "Indiana makes most of the US's popcorn. Increases click value by 2."
+        "Indiana makes most of the US's popcorn. Click value twice as efficient."
     ],
     image: [
         "butter.svg",
@@ -119,34 +121,40 @@ let achivement = {
     name: [
         "The Great Beginning",
         "The Feature Popcorn Entrepreneur",
-        "One Click..."
+        "One Click...",
+        "Mad Constructer"
     ],
     description: [
         "Have your first popcorn clicked",
-        "Have your first upgrade",
-        "Click the popcorn 1 time"
+        "Have your first building",
+        "Click the popcorn 1 time",
+        "Click 1000 times"
     ],
     image: [
         "popcorn.svg",
         "fancy_popcorn.svg",
-        "cursor.svg"
+        "cursor.svg",
+        "mad_cursor.svg"
     ],
     type: [
         "score",
         "building",
+        "click",
         "click"
     ],
     requirement: [
         1,
         1,
-        1
+        1,
+        1000
     ],
     objectIndex: [
         -1,
         0,
+        -1,
         -1
     ],
-    awarded: [false, false, false],
+    awarded: [false, false, false, alse],
 
     earn: function (index) {
         this.awarded[index] = true;
@@ -165,7 +173,7 @@ let display = {
     updateShop: () => {
         document.getElementById("shopContainer").innerHTML = "";
         for (let i = 0; i < building.name.length; i++) {
-            document.getElementById("shopContainer").innerHTML += '<table class="shopButton unselectable" onclick="building.purchase(' + i + ');"><tr><td id="image"><img src="img/' + building.image[i] + '" draggable="false"></td><td id="nameAndCost"><p>' + building.name[i] + '</p><p><span>' + building.cost[i] + '</span> Pop&shy;corn Pieces</p></td><td id="amount"><span>' + building.count[i] + '</span></td></tr></table>';
+            document.getElementById("shopContainer").innerHTML += '<table class="shopButton unselectable" onclick="building.purchase(' + i + ');" title="Wage: ' + building.wage[i] + ' &#10; Increases popcorn per second by: ' + building.income[i] + ' &#10; Cost Multiplier: ' + building.costMultiplier[i] + '"><tr><td id="image"><img src="img/' + building.image[i] + '" draggable="false"></td><td id="nameAndCost"><p>' + building.name[i] + '</p><p><span>' + building.cost[i] + '</span> Pop&shy;corn Pieces</p></td><td id="amount"><span>' + building.count[i] + '</span></td></tr></table>';
         }
     },
     updateUpgrades: () => {
