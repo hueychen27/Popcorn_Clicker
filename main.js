@@ -154,7 +154,7 @@ let achivement = {
         -1,
         -1
     ],
-    awarded: [false, false, false, alse],
+    awarded: [false, false, false, false],
 
     earn: function (index) {
         this.awarded[index] = true;
