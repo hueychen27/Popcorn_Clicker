@@ -282,14 +282,6 @@ function resetGame() {
             let gameSave = {};
             localStorage.setItem("gameSave", JSON.stringify(gameSave));
             location.reload();
-        } else if (result.isDenied) {
-            Swal.fire({
-                title: "Cancelled",
-                text: "Game not reset.",
-                icon: "info",
-                showConfirmationButton: false,
-                timer: 2000
-            })
         }
     })
 }
