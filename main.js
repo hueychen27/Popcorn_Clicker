@@ -65,37 +65,53 @@ let building = {
 let upgrade = {
     name: [
         "Real Butter",
-        "Made In Indiana, USA"
+        "Made In Indiana, USA",
+        "Free Food",
+        "Carbon Dioxide Free Factories"
     ],
     description: [
         "Popcorn batches are twice as efficient.",
-        "Indiana makes most of the US's popcorn. Click value twice as efficient."
+        "Indiana makes most of the US's popcorn. Click value twice as efficient.",
+        "Employees are happier. Wage is decreased by 5%.",
+        "Factories are now carbon dioxide free! Cost multiplier is now reduced by 10%."
     ],
     image: [
         "butter.svg",
-        "indiana.svg"
+        "indiana.svg",
+        "popcorn.svg",
+        "co2.svg"
     ],
     type: [
         "building",
-        "click"
+        "click",
+        "wage",
+        "costMultiplier"
     ],
     cost: [
         500,
-        1000
+        1000,
+        100000,
+        3333333
     ],
     buildingIndex: [
         0,
-        1
+        1,
+        2,
+        3
     ],
     requirement: [
+        1,
+        1,
         1,
         1
     ],
     bonus: [
         2,
-        2
+        2,
+        -1.05,
+        -1.1
     ],
-    purchased: [false, false],
+    purchased: [false, false, false, false],
     purchase: function (index) {
         if (!this.purchased[index] && game.score >= this.cost[index]) {
             if (this.type[index] == "building" && building.count[this.buildingIndex[index]] >= this.requirement[index]) {
@@ -112,6 +128,20 @@ let upgrade = {
 
                 display.updateUpgrades();
                 display.updateScore();
+            } else if (this.type[index] == "wage" && building.count[this.buildingIndex[index]] >= this.requirement[index]) {
+                game.score -= this.cost[index];
+                building.wage[i] *= this.bonus[index];
+                this.purchased[index] = true;
+
+                display.updateUpgrades();
+                display.updateScore();
+            } else if (this.type[index] == "costMultiplier" && building.count[this.buildingIndex[index]] >= this.requirement[index]) {
+                game.score -= this.cost[index];
+                building.costMultiplier[i] *= this.bonus[index];
+                this.purchased[index] = true;
+
+                display.updateUpgrades();
+                display.updateScore();
             }
         }
     }
@@ -120,13 +150,13 @@ let upgrade = {
 let achivement = {
     name: [
         "The Great Beginning",
-        "The Feature Popcorn Entrepreneur",
+        "The Future Popcorn Entrepreneur",
         "One Click...",
-        "Mad Constructer"
+        "Mad Clicker"
     ],
     description: [
         "Have your first popcorn clicked",
-        "Have your first building",
+        "Get a batch of popcorn.",
         "Click the popcorn 1 time",
         "Click 1000 times"
     ],
@@ -184,6 +214,10 @@ let display = {
                     document.getElementById("upgradeContainer").innerHTML += '<img src="img/' + upgrade.image[i] + '" title="' + upgrade.name[i] + ' &#10; ' + upgrade.description[i] + ' &#10; (' + upgrade.cost[i] + ' popcorn pieces)" onclick="upgrade.purchase(' + i + ')';
                 } else if (upgrade.type[i] == "click" && game.totalClicks >= upgrade.requirement[i]) {
                     document.getElementById("upgradeContainer").innerHTML += '<img src="img/' + upgrade.image[i] + '" title="' + upgrade.name[i] + ' &#10; ' + upgrade.description[i] + ' &#10; (' + upgrade.cost[i] + ' popcorn pieces)" onclick="upgrade.purchase(' + i + ')';
+                } else if (upgrade.type[i] == "wage" && building.count[upgrade.buildingIndex[i]] >= upgrade.requirement[i]) {
+                    document.getElementById("upgradeContainer").innerHTML += '<img src="img/' + upgrade.image[i] + '" title="' + upgrade.name[i] + ' &#10; ' + upgrade.description[i] + ' &#10; (' + upgrade.cost[i] + ' popcorn pieces)" onclick="upgrade.purchase(' + i + ')';
+                } else if (upgrade.type[i] == "costMultiplier" && building.count[upgrade.buildingIndex[i]] >= upgrade.requirement[i]) {
+                    document.getElementById("upgradeContainer").innerHTML += '<img src="img/' + upgrade.image[i] + '" title="' + upgrade.name[i] + ' &#10; ' + upgrade.description[i] + ' &#10; (' + upgrade.cost[i] + ' popcorn pieces)" onclick="upgrade.purchase(' + i + ')';
                 }
             }
         }
@@ -214,7 +248,6 @@ function background() {
             let backgroundMusic = new Audio('sounds/popcorn.flac');
             backgroundMusic.loop = true;
             backgroundMusic.play();
-        } else if (result.isDenied) {
         }
     })
 }
@@ -226,9 +259,11 @@ function saveGame() {
         totalClicks: game.totalClicks,
         clickValue: game.clickValue,
         version: game.version,
+        buidlingWage: building.wage,
         buildingCount: building.count,
         buildingIncome: building.income,
         buildingCost: building.cost,
+        buildingCostMultiplier: building.costMultiplier,
         upgradePurchased: upgrade.purchased,
         achivementAwarded: achivement.awarded
     }
@@ -242,6 +277,11 @@ function loadGame() {
         if (typeof savedGame.totalScore !== "undefined") game.totalScore = savedGame.totalScore;
         if (typeof savedGame.totalClicks !== "undefined") game.totalClicks = savedGame.totalClicks;
         if (typeof savedGame.clickValue !== "undefined") game.clickValue = savedGame.clickValue;
+        if (typeof savedGame.buidlingWage !== "undefined") {
+            for (let i = 0; i < savedGame.buidlingWage.length; i++) {
+                building.wage[i] = savedGame.buidlingWage[i];
+            }
+        }
         if (typeof savedGame.buildingCount !== "undefined") {
             for (let i = 0; i < savedGame.buildingCount.length; i++) {
                 building.count[i] = savedGame.buildingCount[i];
@@ -265,6 +305,11 @@ function loadGame() {
         if (typeof savedGame.achivementAwarded !== "undefined") {
             for (let i = 0; i < savedGame.achivementAwarded.length; i++) {
                 achivement.awarded[i] = savedGame.achivementAwarded[i];
+            }
+        }
+        if (typeof savedGame.buildingCostMultiplier !== "undefined") {
+            for (let i = 0; i < savedGame.buildingCostMultiplier.length; i++) {
+                building.costMultiplier[i] = savedGame.buildingCostMultiplier[i];
             }
         }
     }

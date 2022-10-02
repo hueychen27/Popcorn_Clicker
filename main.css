@@ -27,6 +27,7 @@
 .sectionRight {
     float: right;
     width: 20%;
+    overflow: auto;
 }
 
 .scoreContainer {
@@ -95,7 +96,6 @@
     width: 100%;
     margin: 10px 0px 10px 0px;
     cursor: pointer;
-    overflow: auto;
 }
 
 .shopButton:hover {
