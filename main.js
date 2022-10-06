@@ -224,7 +224,7 @@ let display = {
     },
     updateAchievements: () => {
         document.getElementById("achievementContainer").innerHTML = "";
-        for (i = 0; i < achivement.name.length; i++) {
+        for (let i = 0; i < achivement.name.length; i++) {
             if (achivement.awarded[i]) {
                 document.getElementById("achievementContainer").innerHTML += '<img src="img/' + achivement.image[i] + '" title="' + achivement.name[i] + ' &#10; ' + achivement.description[i] + '">';
             }
