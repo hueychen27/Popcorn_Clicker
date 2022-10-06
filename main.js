@@ -431,7 +431,7 @@ document.addEventListener("keydown", function (e) {
 }, false)
 
 document.addEventListener("keydown", function (e) {
-    if (e.ctrlKey && e.shiftKey && e.key === 'r') {
+    if (e.ctrlKey && e.altKey && e.key === 'r') {
         e.preventDefault();
         resetGame();
     }
