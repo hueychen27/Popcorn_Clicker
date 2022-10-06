@@ -226,21 +226,24 @@
 }
 
 /* custom scrollbar only for webkit browsers (sorry firefox users)*/
-*::-webkit-scrollbar {
+::-webkit-scrollbar {
     width: 20px;
+    box-sizing: border-box;
 }
 
-*::-webkit-scrollbar-track {
+::-webkit-scrollbar-track {
     background-color: transparent;
+    box-sizing: border-box;
 }
 
-*::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb {
     background-color: hsl(196, 15%, 86%);
     border-radius: 20px;
     border: 6px solid transparent;
     background-clip: content-box;
+    box-sizing: border-box;
 }
 
-*::-webkit-scrollbar-thumb:hover {
+::-webkit-scrollbar-thumb:hover {
     background-color: hsl(190, 15%, 70%);
 }
