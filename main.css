@@ -228,6 +228,7 @@
 /* custom scrollbar only for webkit browsers (sorry firefox users)*/
 ::-webkit-scrollbar {
     width: 20px;
+    height: 20px;
     box-sizing: border-box;
 }
 
