@@ -147,48 +147,62 @@ let upgrade = {
     }
 }
 
-let achivement = {
+let achievement = {
     name: [
         "The Great Beginning",
         "The Future Popcorn Entrepreneur",
         "One Click...",
-        "Mad Clicker"
+        "Mad Clicker",
+        "Renovation I"
     ],
     description: [
-        "Have your first popcorn clicked",
+        "Have your first popcorn clicked.",
         "Get a batch of popcorn.",
-        "Click the popcorn 1 time",
-        "Click 1000 times"
+        "Click the popcorn 1 time.",
+        "Click 1000 times.",
+        "Have a simple background at 30 popcorn per second."
     ],
     image: [
         "popcorn.svg",
         "fancy_popcorn.svg",
         "cursor.svg",
-        "mad_cursor.svg"
+        "mad_cursor.svg",
+        "main_background_achievement.svg"
     ],
     type: [
         "score",
         "building",
         "click",
-        "click"
+        "click",
+        "background"
     ],
     requirement: [
         1,
         1,
         1,
-        1000
+        1000,
+        undefined
     ],
     objectIndex: [
         -1,
         0,
         -1,
-        -1
+        -1,
+        1
     ],
-    awarded: [false, false, false, false],
-
-    earn: function (index) {
-        this.awarded[index] = true;
+    awarded: [false, false, false, false, false],
+    earn: index => {
+        achievement.awarded[index] = true;
     }
+}
+
+let backgroundType = {
+    image: [
+        "none",
+        "url('img/main_background.svg')"
+    ],
+    requirement: [0, 30],
+    awarded: [false, false]
 }
 
 let display = {
@@ -224,14 +238,22 @@ let display = {
     },
     updateAchievements: () => {
         document.getElementById("achievementContainer").innerHTML = "";
-        for (let i = 0; i < achivement.name.length; i++) {
-            if (achivement.awarded[i]) {
-                document.getElementById("achievementContainer").innerHTML += '<img src="img/' + achivement.image[i] + '" title="' + achivement.name[i] + ' &#10; ' + achivement.description[i] + '">';
+        for (let i = 0; i < achievement.name.length; i++) {
+            if (achievement.awarded[i]) {
+                document.getElementById("achievementContainer").innerHTML += '<img src="img/' + achievement.image[i] + '" title="' + achievement.name[i] + ' &#10; ' + achievement.description[i] + '">';
             }
         }
     },
     updateVersion: () => {
         document.getElementById("info").innerHTML = "Popcorn Clicker V" + game.version;
+    },
+    updateBackground: () => {
+        for (let i = 0; i < backgroundType.image.length; i++) {
+            if (game.getScorePerSecond() >= backgroundType.requirement[i]) {
+                backgroundType.awarded[i] = true;
+                document.body.style.backgroundImage = backgroundType.image[i];
+            }
+        }
     }
 }
 
@@ -265,7 +287,7 @@ function saveGame() {
         buildingCost: building.cost,
         buildingCostMultiplier: building.costMultiplier,
         upgradePurchased: upgrade.purchased,
-        achivementAwarded: achivement.awarded
+        achievementAwarded: achievement.awarded
     }
     localStorage.setItem("gameSave", JSON.stringify(gameSave));
 }
@@ -302,9 +324,9 @@ function loadGame() {
                 upgrade.purchased[i] = savedGame.upgradePurchased[i];
             }
         }
-        if (typeof savedGame.achivementAwarded !== "undefined") {
-            for (let i = 0; i < savedGame.achivementAwarded.length; i++) {
-                achivement.awarded[i] = savedGame.achivementAwarded[i];
+        if (typeof savedGame.achievementAwarded !== "undefined") {
+            for (let i = 0; i < savedGame.achievementAwarded.length; i++) {
+                achievement.awarded[i] = savedGame.achievementAwarded[i];
             }
         }
         if (typeof savedGame.buildingCostMultiplier !== "undefined") {
@@ -394,13 +416,15 @@ window.onload = function () {
     display.updateAchievements();
     display.updateShop();
     display.updateVersion();
+    display.updateBackground();
 }
 
 setInterval(function () {
-    for (let i = 0; i < achivement.name.length; i++) {
-        if (achivement.type[i] == "score" && game.totalScore >= achivement.requirement[i]) achivement.earn(i);
-        else if (achivement.type[i] == "click" && game.totalClicks >= achivement.requirement[i]) achivement.earn(i);
-        else if (achivement.type[i] == "building" && building.count[achivement.objectIndex[i]] >= achivement.requirement[i]) achivement.earn(i);
+    for (let i = 0; i < achievement.name.length; i++) {
+        if (achievement.type[i] == "score" && game.totalScore >= achievement.requirement[i]) achievement.earn(i);
+        else if (achievement.type[i] == "click" && game.totalClicks >= achievement.requirement[i]) achievement.earn(i);
+        else if (achievement.type[i] == "building" && building.count[achievement.objectIndex[i]] >= achievement.requirement[i]) achievement.earn(i);
+        else if (achievement.type[i] == "background" && backgroundType.awarded[achievement.objectIndex[i]] == true) achievement.earn(i);
     }
 
     game.score += game.getScorePerSecond();
@@ -413,6 +437,7 @@ setInterval(function () {
     display.updateScore();
     display.updateWage();
     display.updateUpgrades();
+    display.updateBackground();
 }, 0) // 10 seconds
 
 setInterval(function () {

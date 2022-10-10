@@ -2,6 +2,11 @@
     box-sizing: content-box;
 }
 
+body {
+    background-size: 250%;
+    background-position: center;
+}
+
 /* Miscellaneous Classes*/
 
 .unselectable {
@@ -22,6 +27,7 @@
     left: 1%;
     border-radius: 2px;
     border: 1px solid black;
+    background-color: white;
 }
 
 #github a {
