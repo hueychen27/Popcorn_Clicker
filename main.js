@@ -3,7 +3,7 @@ let game = {
     totalScore: 0,
     totalClicks: 0,
     clickValue: 1,
-    version: 0.9,
+    version: '0.9.1',
 
     addToScore: function (amount) {
         this.score += amount;
@@ -112,7 +112,7 @@ let upgrade = {
         -1.1
     ],
     purchased: [false, false, false, false],
-    purchase: function (index) {
+    purchase: index => {
         if (!this.purchased[index] && game.score >= this.cost[index]) {
             if (this.type[index] == "building" && building.count[this.buildingIndex[index]] >= this.requirement[index]) {
                 game.score -= this.cost[index];
@@ -207,17 +207,17 @@ let backgroundType = {
 
 let display = {
     updateScore: () => {
-        document.getElementById("score").innerHTML = game.score;
-        document.getElementById("autoClickPerSecond").innerHTML = game.getScorePerSecond();
-        document.title = "Popcorn Clicker - " + game.score + " Popcorn Pieces";
+        document.getElementById("score").innerHTML = numberformat.format(game.score);
+        document.getElementById("autoClickPerSecond").innerHTML = numberformat.format(game.getScorePerSecond());
+        document.title = "Popcorn Clicker - " + numberformat.format(game.score) + " Popcorn Pieces";
     },
     updateWage: () => {
-        document.getElementById("wage").innerHTML = game.getWage()
+        document.getElementById("wage").innerHTML = numberformat.format(game.getWage());
     },
     updateShop: () => {
         document.getElementById("shopContainer").innerHTML = "";
         for (let i = 0; i < building.name.length; i++) {
-            document.getElementById("shopContainer").innerHTML += '<table class="shopButton unselectable" onclick="building.purchase(' + i + ');" title="Wage: ' + building.wage[i] + ' &#10; Increases popcorn per second by: ' + building.income[i] + ' &#10; Cost Multiplier: ' + building.costMultiplier[i] + '" role="button"><tr><td id="image"><img src="img/' + building.image[i] + '" draggable="false"></td><td id="nameAndCost"><p>' + building.name[i] + '</p><p><span>' + building.cost[i] + '</span> Pop&shy;corn Pieces</p></td><td id="amount"><span>' + building.count[i] + '</span></td></tr></table>';
+            document.getElementById("shopContainer").innerHTML += '<table class="shopButton unselectable" onclick="building.purchase(' + i + ');" title="Wage: ' + building.wage[i] + ' &#10; Increases popcorn per second by: ' + building.income[i] + ' &#10; Cost Multiplier: ' + building.costMultiplier[i] + '" role="button"><tr><td id="image"><img src="img/' + building.image[i] + '" draggable="false"></td><td id="nameAndCost"><p>' + building.name[i] + '</p><p><span>' + numberformat.format(building.cost[i]) + '</span> Pop&shy;corn Pieces</p></td><td id="amount"><span>' + numberformat.format(building.count[i]) + '</span></td></tr></table>';
         }
     },
     updateUpgrades: () => {
@@ -225,13 +225,13 @@ let display = {
         for (let i = 0; i < upgrade.name.length; i++) {
             if (!upgrade.purchased[i]) {
                 if (upgrade.type[i] == "building" && building.count[upgrade.buildingIndex[i]] >= upgrade.requirement[i]) {
-                    document.getElementById("upgradeContainer").innerHTML += '<img src="img/' + upgrade.image[i] + '" title="' + upgrade.name[i] + ' &#10; ' + upgrade.description[i] + ' &#10; (' + upgrade.cost[i] + ' popcorn pieces)" onclick="upgrade.purchase(' + i + ')';
+                    document.getElementById("upgradeContainer").innerHTML += '<img src="img/' + upgrade.image[i] + '" title="' + upgrade.name[i] + ' &#10; ' + upgrade.description[i] + ' &#10; (' + numberformat.format(upgrade.cost[i]) + ' popcorn pieces)" onclick="upgrade.purchase(' + i + ')">';
                 } else if (upgrade.type[i] == "click" && game.totalClicks >= upgrade.requirement[i]) {
-                    document.getElementById("upgradeContainer").innerHTML += '<img src="img/' + upgrade.image[i] + '" title="' + upgrade.name[i] + ' &#10; ' + upgrade.description[i] + ' &#10; (' + upgrade.cost[i] + ' popcorn pieces)" onclick="upgrade.purchase(' + i + ')';
+                    document.getElementById("upgradeContainer").innerHTML += '<img src="img/' + upgrade.image[i] + '" title="' + upgrade.name[i] + ' &#10; ' + upgrade.description[i] + ' &#10; (' + numberformat.format(upgrade.cost[i]) + ' popcorn pieces)" onclick="upgrade.purchase(' + i + ')">';
                 } else if (upgrade.type[i] == "wage" && building.count[upgrade.buildingIndex[i]] >= upgrade.requirement[i]) {
-                    document.getElementById("upgradeContainer").innerHTML += '<img src="img/' + upgrade.image[i] + '" title="' + upgrade.name[i] + ' &#10; ' + upgrade.description[i] + ' &#10; (' + upgrade.cost[i] + ' popcorn pieces)" onclick="upgrade.purchase(' + i + ')';
+                    document.getElementById("upgradeContainer").innerHTML += '<img src="img/' + upgrade.image[i] + '" title="' + upgrade.name[i] + ' &#10; ' + upgrade.description[i] + ' &#10; (' + numberformat.format(upgrade.cost[i]) + ' popcorn pieces)" onclick="upgrade.purchase(' + i + ')">';
                 } else if (upgrade.type[i] == "costMultiplier" && building.count[upgrade.buildingIndex[i]] >= upgrade.requirement[i]) {
-                    document.getElementById("upgradeContainer").innerHTML += '<img src="img/' + upgrade.image[i] + '" title="' + upgrade.name[i] + ' &#10; ' + upgrade.description[i] + ' &#10; (' + upgrade.cost[i] + ' popcorn pieces)" onclick="upgrade.purchase(' + i + ')';
+                    document.getElementById("upgradeContainer").innerHTML += '<img src="img/' + upgrade.image[i] + '" title="' + upgrade.name[i] + ' &#10; ' + upgrade.description[i] + ' &#10; (' + numberformat.format(upgrade.cost[i]) + ' popcorn pieces)" onclick="upgrade.purchase(' + i + ')">';
                 }
             }
         }
