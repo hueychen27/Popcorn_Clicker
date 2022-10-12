@@ -112,7 +112,7 @@ let upgrade = {
         -1.1
     ],
     purchased: [false, false, false, false],
-    purchase: index => {
+    purchase: function (index) {
         if (!this.purchased[index] && game.score >= this.cost[index]) {
             if (this.type[index] == "building" && building.count[this.buildingIndex[index]] >= this.requirement[index]) {
                 game.score -= this.cost[index];
