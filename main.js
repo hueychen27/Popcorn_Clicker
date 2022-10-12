@@ -108,8 +108,8 @@ let upgrade = {
     bonus: [
         2,
         2,
-        -1.05,
-        -1.1
+        5,
+        10
     ],
     purchased: [false, false, false, false],
     purchase: function (index) {
@@ -130,14 +130,14 @@ let upgrade = {
                 display.updateScore();
             } else if (this.type[index] == "wage" && building.count[this.buildingIndex[index]] >= this.requirement[index]) {
                 game.score -= this.cost[index];
-                building.wage[index] *= this.bonus[index];
+                building.wage[index] /= this.bonus[index];
                 this.purchased[index] = true;
 
                 display.updateUpgrades();
                 display.updateScore();
             } else if (this.type[index] == "costMultiplier" && building.count[this.buildingIndex[index]] >= this.requirement[index]) {
                 game.score -= this.cost[index];
-                building.costMultiplier[index] *= this.bonus[index];
+                building.costMultiplier[index] /= this.bonus[index];
                 this.purchased[index] = true;
 
                 display.updateUpgrades();
