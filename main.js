@@ -438,7 +438,7 @@ setInterval(function () {
     display.updateWage();
     display.updateUpgrades();
     display.updateBackground();
-}, 0) // 10 seconds
+}, 0) // 0 seconds
 
 setInterval(function () {
     game.score -= game.getWage();
