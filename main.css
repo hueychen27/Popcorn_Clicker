@@ -197,6 +197,10 @@ body {
     transition: 0.1s filter ease-in;
 }
 
+#upgradeContainer > img {
+    filter: brightness(95%);
+}
+
 #upgradeContainer > img:active {
     filter: brightness(90%);
 }
