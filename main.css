@@ -197,7 +197,7 @@ body {
     transition: 0.1s filter ease-in;
 }
 
-#upgradeContainer > img {
+#upgradeContainer > img:hover {
     filter: brightness(95%);
 }
 
