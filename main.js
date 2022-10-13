@@ -73,7 +73,7 @@ let upgrade = {
         "Popcorn batches are twice as efficient.",
         "Indiana makes most of the US's popcorn. Click value twice as efficient.",
         "Employees are happier. Wage is decreased by 5%.",
-        "Factories are now carbon dioxide free! Cost multiplier is now reduced by 10%."
+        "Factories are now carbon dioxide free! Cost multiplier is now reduced by 5%."
     ],
     image: [
         "butter.svg",
@@ -108,8 +108,8 @@ let upgrade = {
     bonus: [
         2,
         2,
-        5,
-        10
+        0.95,
+        0.95
     ],
     purchased: [false, false, false, false],
     purchase: function (index) {
@@ -130,18 +130,20 @@ let upgrade = {
                 display.updateScore();
             } else if (this.type[index] == "wage" && building.count[this.buildingIndex[index]] >= this.requirement[index]) {
                 game.score -= this.cost[index];
-                building.wage[index] /= this.bonus[index];
+                building.wage[this.buildingIndex[index]] *= this.bonus[index];
                 this.purchased[index] = true;
 
                 display.updateUpgrades();
                 display.updateScore();
+                display.updateShop();
             } else if (this.type[index] == "costMultiplier" && building.count[this.buildingIndex[index]] >= this.requirement[index]) {
                 game.score -= this.cost[index];
-                building.costMultiplier[index] /= this.bonus[index];
+                building.costMultiplier[this.buildingIndex[index]] *= this.bonus[index];
                 this.purchased[index] = true;
 
                 display.updateUpgrades();
                 display.updateScore();
+                display.updateShop();
             }
         }
     }
@@ -420,6 +422,12 @@ window.onload = function () {
 }
 
 setInterval(function () {
+    display.updateBackground();
+    display.updateWage();
+    display.updateScore();
+}, 0)
+
+setInterval(function () {
     for (let i = 0; i < achievement.name.length; i++) {
         if (achievement.type[i] == "score" && game.totalScore >= achievement.requirement[i]) achievement.earn(i);
         else if (achievement.type[i] == "click" && game.totalClicks >= achievement.requirement[i]) achievement.earn(i);
@@ -434,11 +442,8 @@ setInterval(function () {
 }, 1000) // 1 second
 
 setInterval(function () {
-    display.updateScore();
-    display.updateWage();
     display.updateUpgrades();
-    display.updateBackground();
-}, 0) // 0 seconds
+}, 1000) // 0 seconds
 
 setInterval(function () {
     game.score -= game.getWage();
