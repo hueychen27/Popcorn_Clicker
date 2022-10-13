@@ -192,6 +192,14 @@ body {
     height: 64px;
 }
 
+#upgradeContainer > img {
+    cursor: pointer;
+    transition: 0.1s filter ease-in;
+}
+
+#upgradeContainer > img:active {
+    filter: brightness(90%);
+}
 /* Cheat Container Styling */
 
 #cheatContainer {
