@@ -443,7 +443,7 @@ setInterval(function () {
 
 setInterval(function () {
     display.updateUpgrades();
-}, 1000) // 0 seconds
+}, 1200) // 1.2 seconds
 
 setInterval(function () {
     game.score -= game.getWage();
