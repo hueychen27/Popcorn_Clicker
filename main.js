@@ -67,51 +67,59 @@ let upgrade = {
         "Real Butter",
         "Made In Indiana, USA",
         "Free Food",
-        "Carbon Dioxide Free Factories"
+        "Carbon Dioxide Free Factories",
+        "Caramel Popcorn"
     ],
     description: [
         "Popcorn batches are twice as efficient.",
         "Indiana makes most of the US's popcorn. Click value twice as efficient.",
         "Employees are happier. Wage is decreased by 5%.",
-        "Factories are now carbon dioxide free! Cost multiplier is now reduced by 5%."
+        "Factories are now carbon dioxide free! Cost multiplier is now reduced by 5%.",
+        "Caramel increases efficiency by 40 times."
     ],
     image: [
         "butter.svg",
         "indiana.svg",
         "popcorn.svg",
-        "co2.svg"
+        "co2.svg",
+        "caramel.svg"
     ],
     type: [
         "building",
         "click",
         "wage",
-        "costMultiplier"
+        "costMultiplier",
+        "click"
     ],
     cost: [
         500,
         1000,
         100000,
-        3333333
+        3333333,
+        4444
     ],
     buildingIndex: [
         0,
         1,
         2,
-        3
+        3,
+        2
     ],
     requirement: [
         1,
         1,
         1,
-        1
+        1,
+        3
     ],
     bonus: [
         2,
         2,
         0.95,
-        0.95
+        0.95,
+        40
     ],
-    purchased: [false, false, false, false],
+    purchased: [false, false, false, false, false],
     purchase: function (index) {
         if (!this.purchased[index] && game.score >= this.cost[index]) {
             if (this.type[index] == "building" && building.count[this.buildingIndex[index]] >= this.requirement[index]) {
