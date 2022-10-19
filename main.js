@@ -235,13 +235,13 @@ let display = {
         for (let i = 0; i < upgrade.name.length; i++) {
             if (!upgrade.purchased[i]) {
                 if (upgrade.type[i] == "building" && building.count[upgrade.buildingIndex[i]] >= upgrade.requirement[i]) {
-                    document.getElementById("upgradeContainer").innerHTML += '<img src="img/' + upgrade.image[i] + '" title="' + upgrade.name[i] + ' &#10; ' + upgrade.description[i] + ' &#10; (' + numberformat.format(upgrade.cost[i]) + ' popcorn pieces)" onclick="upgrade.purchase(' + i + ')">';
+                    document.getElementById("upgradeContainer").innerHTML += '<img src="img/' + upgrade.image[i] + '" title="' + upgrade.name[i] + ' &#10; ' + upgrade.description[i] + ' &#10; (' + numberformat.format(upgrade.cost[i]) + ' popcorn pieces)" onclick="upgrade.purchase(' + i + ')" class="unselectable">';
                 } else if (upgrade.type[i] == "click" && game.totalClicks >= upgrade.requirement[i]) {
-                    document.getElementById("upgradeContainer").innerHTML += '<img src="img/' + upgrade.image[i] + '" title="' + upgrade.name[i] + ' &#10; ' + upgrade.description[i] + ' &#10; (' + numberformat.format(upgrade.cost[i]) + ' popcorn pieces)" onclick="upgrade.purchase(' + i + ')">';
+                    document.getElementById("upgradeContainer").innerHTML += '<img src="img/' + upgrade.image[i] + '" title="' + upgrade.name[i] + ' &#10; ' + upgrade.description[i] + ' &#10; (' + numberformat.format(upgrade.cost[i]) + ' popcorn pieces)" onclick="upgrade.purchase(' + i + ')" class="unselectable">';
                 } else if (upgrade.type[i] == "wage" && building.count[upgrade.buildingIndex[i]] >= upgrade.requirement[i]) {
-                    document.getElementById("upgradeContainer").innerHTML += '<img src="img/' + upgrade.image[i] + '" title="' + upgrade.name[i] + ' &#10; ' + upgrade.description[i] + ' &#10; (' + numberformat.format(upgrade.cost[i]) + ' popcorn pieces)" onclick="upgrade.purchase(' + i + ')">';
+                    document.getElementById("upgradeContainer").innerHTML += '<img src="img/' + upgrade.image[i] + '" title="' + upgrade.name[i] + ' &#10; ' + upgrade.description[i] + ' &#10; (' + numberformat.format(upgrade.cost[i]) + ' popcorn pieces)" onclick="upgrade.purchase(' + i + ')" class="unselectable">';
                 } else if (upgrade.type[i] == "costMultiplier" && building.count[upgrade.buildingIndex[i]] >= upgrade.requirement[i]) {
-                    document.getElementById("upgradeContainer").innerHTML += '<img src="img/' + upgrade.image[i] + '" title="' + upgrade.name[i] + ' &#10; ' + upgrade.description[i] + ' &#10; (' + numberformat.format(upgrade.cost[i]) + ' popcorn pieces)" onclick="upgrade.purchase(' + i + ')">';
+                    document.getElementById("upgradeContainer").innerHTML += '<img src="img/' + upgrade.image[i] + '" title="' + upgrade.name[i] + ' &#10; ' + upgrade.description[i] + ' &#10; (' + numberformat.format(upgrade.cost[i]) + ' popcorn pieces)" onclick="upgrade.purchase(' + i + ')" class="unselectable">';
                 }
             }
         }
