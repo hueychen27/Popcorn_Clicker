@@ -53,7 +53,11 @@
             showDenyButton: true
         }).then((result) => {
             if (result.isConfirmed) {
-                game.addToScore(game.score * 1000);
+                if (game.score <= 1) {
+                    game.addToScore(1000);
+                } else {
+                    game.addToScore(game.score * 1000);
+                }
             }
         })">Multiply Score by 1000</div>
         <div class="button unselectable" role="button" onclick="multiplyByInfinity()">Set Score to Infinity</div>
