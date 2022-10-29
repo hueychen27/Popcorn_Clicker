@@ -164,7 +164,7 @@ let upgrade = {
                 display.updateScore();
             } else if (this.type[index] == "wage" && building.count[this.buildingIndex[index]] >= this.requirement[index]) {
                 game.score -= this.cost[index];
-                building.wage[this.buildingIndex[index]] += building.wage[this.buildingIndex[index]] * this.bonus[index];
+                building.wage[this.buildingIndex[index]] -= building.wage[this.buildingIndex[index]] * this.bonus[index];
                 this.purchased[index] = true;
 
                 display.updateUpgrades();
@@ -172,7 +172,7 @@ let upgrade = {
                 display.updateShop();
             } else if (this.type[index] == "costMultiplier" && building.count[this.buildingIndex[index]] >= this.requirement[index]) {
                 game.score -= this.cost[index];
-                building.costMultiplier[this.buildingIndex[index]] += building.costMultiplier[this.buildingIndex[index]] * this.bonus[index];
+                building.costMultiplier[this.buildingIndex[index]] -= building.costMultiplier[this.buildingIndex[index]] * this.bonus[index];
                 this.purchased[index] = true;
 
                 display.updateUpgrades();
