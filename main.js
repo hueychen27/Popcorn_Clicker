@@ -68,58 +68,84 @@ let upgrade = {
         "Made In Indiana, USA",
         "Free Food",
         "Carbon Dioxide Free Factories",
-        "Caramel Popcorn"
+        "Caramel Popcorn",
+        "A Revolution of Batches.",
+        "Non-GMO Popcorn",
+        "Less Work Time; More Work Done."
     ],
     description: [
         "Popcorn batches are twice as efficient.",
         "Indiana makes most of the US's popcorn. Click value twice as efficient.",
-        "Employees are happier. Wage is decreased by 5%.",
-        "Factories are now carbon dioxide free! Cost multiplier is now reduced by 5%.",
-        "Caramel increases efficiency by 40 times."
+        "Employees are happier. Wage is decreased by 15%.",
+        "Factories are now carbon dioxide free! Cost multiplier is now reduced by 15%.",
+        "Caramel increases clicker efficiency by 40 times.",
+        "Popcorn batches are now 50 times as efficient.",
+        "Popcorn Farms are now 35 times as efficient.",
+        "Popcorn Employees are now 50 times as efficient."
     ],
     image: [
         "butter.svg",
         "indiana.svg",
         "popcorn.svg",
         "co2.svg",
-        "caramel.svg"
+        "caramel.svg",
+        "batch_revolution.svg",
+        "non-gmo.svg",
+        "less_times.svg"
     ],
     type: [
         "building",
         "click",
         "wage",
         "costMultiplier",
-        "click"
+        "click",
+        "building",
+        "building",
+        "building"
     ],
     cost: [
         500,
         1000,
         100000,
         3333333,
-        4444
+        4444,
+        555555,
+        1000500,
+        6060606
     ],
     buildingIndex: [
         0,
         1,
         2,
         3,
-        2
+        2,
+        0,
+        1,
+        2,
+        3
     ],
     requirement: [
         1,
         1,
         1,
         1,
-        3
+        3,
+        5,
+        5,
+        5,
+        5
     ],
     bonus: [
         2,
         2,
-        0.95,
-        0.95,
-        40
+        0.15,
+        0.15,
+        40,
+        50,
+        35,
+        50
     ],
-    purchased: [false, false, false, false, false],
+    purchased: [false, false, false, false, false, false, false, false],
     purchase: function (index) {
         if (!this.purchased[index] && game.score >= this.cost[index]) {
             if (this.type[index] == "building" && building.count[this.buildingIndex[index]] >= this.requirement[index]) {
@@ -138,7 +164,7 @@ let upgrade = {
                 display.updateScore();
             } else if (this.type[index] == "wage" && building.count[this.buildingIndex[index]] >= this.requirement[index]) {
                 game.score -= this.cost[index];
-                building.wage[this.buildingIndex[index]] *= this.bonus[index];
+                building.wage[this.buildingIndex[index]] += building.wage[this.buildingIndex[index]] * this.bonus[index];
                 this.purchased[index] = true;
 
                 display.updateUpgrades();
@@ -146,7 +172,7 @@ let upgrade = {
                 display.updateShop();
             } else if (this.type[index] == "costMultiplier" && building.count[this.buildingIndex[index]] >= this.requirement[index]) {
                 game.score -= this.cost[index];
-                building.costMultiplier[this.buildingIndex[index]] *= this.bonus[index];
+                building.costMultiplier[this.buildingIndex[index]] += building.costMultiplier[this.buildingIndex[index]] * this.bonus[index];
                 this.purchased[index] = true;
 
                 display.updateUpgrades();
