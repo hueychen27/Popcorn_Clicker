@@ -255,7 +255,7 @@ let display = {
     updateShop: () => {
         document.getElementById("shopContainer").innerHTML = "";
         for (let i = 0; i < building.name.length; i++) {
-            document.getElementById("shopContainer").innerHTML += '<table class="shopButton unselectable" onclick="building.purchase(' + i + ');" title="Wage: ' + numberformat.format(building.wage[i]) + ' &#10; Increases popcorn per second by: ' + numberformat.format(building.income[i]) + ' &#10; Cost Multiplier: ' + numberformat.format(building.costMultiplier[i]) + '" role="button"><tr><td id="image"><img src="img/' + building.image[i] + '" draggable="false"></td><td id="nameAndCost"><p>' + building.name[i] + '</p><p><span>' + numberformat.format(building.cost[i]) + '</span> Pop&shy;corn Pieces</p></td><td id="amount"><span>' + numberformat.format(building.count[i]) + '</span></td></tr></table>';
+            document.getElementById("shopContainer").innerHTML += '<table class="shopButton unselectable" onclick="building.purchase(' + i + ');" title="Wage: ' + numberformat.format(building.wage[i]) + ' &#10; Increases popcorn per second by: ' + numberformat.format(building.income[i]) + ' &#10; Cost Multiplier: ' + building.costMultiplier[i] + '" role="button"><tr><td id="image"><img src="img/' + building.image[i] + '" draggable="false"></td><td id="nameAndCost"><p>' + building.name[i] + '</p><p><span>' + numberformat.format(building.cost[i]) + '</span> Pop&shy;corn Pieces</p></td><td id="amount"><span>' + numberformat.format(building.count[i]) + '</span></td></tr></table>';
         }
     },
     updateUpgrades: () => {
