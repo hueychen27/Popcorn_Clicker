@@ -49,7 +49,6 @@ let building = {
     cost: [30, 1000, 50000, 400000, 50000000],
 
     costMultiplier: [1.2, 1.6, 1.4, 1.5, 1.5],
-
     purchase: function (index) {
         if (game.score >= this.cost[index]) {
             game.score -= this.cost[index];
@@ -58,8 +57,17 @@ let building = {
             display.updateScore();
             display.updateShop();
             display.updateUpgrades();
-            let clickSound = new Audio(`sounds/crunch.wav`);
-            clickSound.play();
+            function playAudio(audio) {
+                return new Promise(res => {
+                    audio.play()
+                    audio.onended = res
+                })
+            }
+            async function clickSound() {
+                const audio = new Audio('sounds/crunch.wav')
+                await playAudio(audio)
+            }
+            clickSound();
         }
     }
 }
